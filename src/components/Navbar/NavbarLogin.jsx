@@ -13,8 +13,27 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
 import { LuFilter } from "react-icons/lu";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
-const NavbarLogin = () => {
+const NavbarLogin = ({id}) => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/v1/customers/${id}`)
+      .then((res) => {
+        const user = res.data.data;
+        setUser(user);
+        console.log(user);
+      })
+      .catch((err) => {
+        console.error("Error fetching users:", err);
+      });
+  }, [id]);
+
+
   return (
     <>
       {["sm"].map((expand) => (

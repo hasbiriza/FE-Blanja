@@ -12,8 +12,7 @@ import NavbarNonLogin from "@/components/Navbar/NavbarNonLogin";
 export default function Home() {
   return (
    <>
-   <NavbarNonLogin/>
-   <NavbarLogin/>
+   <AuthenticatedNavbar/>
    <div className="container border border-danger ">
 
 
