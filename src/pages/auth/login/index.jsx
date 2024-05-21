@@ -16,7 +16,7 @@ function Login() {
       <Container className="  border border-danger">
         <div className="my-4 d-flex flex-column  align-items-center ">
           <Image className="mb-4" src={logo} alt="logo blanja" />
-          <h6 className=" fw-bold ">Please Login With Your Account ?</h6>
+          <h6 className=" fw-bold ">Please Login With Your Account ??</h6>
         </div>
         <Row className="justify-content-center">
           <Col xs="auto ">
