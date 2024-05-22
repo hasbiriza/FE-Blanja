@@ -76,7 +76,7 @@ The Blanja e-commerce website project is an online platform designed to make it 
 
 This is an example of how to list things you need to use the software and how to install them.
 - [VS Code](https://code.visualstudio.com/)
-- [nodejs](https://nodejs.org/en/download/)
+- [nextjs](https://nextjs.org/)
 - [React js](https://reactjs.org/)
 
 
@@ -85,7 +85,7 @@ This is an example of how to list things you need to use the software and how to
 - Clone This Front End Repo
 
 ```
-git clone https://github.com/sandriirawan/Fe_Blanja_React
+git clone https://github.com/hasbiriza/FE-Blanja/
 ```
 
 - Go To Folder Repo
