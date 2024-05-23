@@ -27,10 +27,10 @@ const Cart = () => {
       <Container>
         <Row>
           <h1 className="fw-bold text-4xl">My Bag</h1>
-          <Col>
+          <Col xs={12} md={8}>
             <div
               id="axios"
-              className="d-flex  align-items-center  shadow-sm mt-3 rounded-3"
+              className="d-flex align-items-center shadow-sm mt-3 rounded-3 p-3"
               style={{ border: "0.5px solid #ccc" }}
             >
               <Checkbox
@@ -49,14 +49,14 @@ const Cart = () => {
               <Button
                 variant="text"
                 sx={{ textTransform: "capitalize" }}
-                className="text-red-600 d-inline-block fw-bold  ms-auto me-3 "
+                className="text-red-600 d-inline-block fw-bold ms-auto me-3"
               >
                 Delete
               </Button>
             </div>
 
             <div
-              className="d-flex shadow-sm mt-3  align-items-center rounded-3"
+              className="d-flex shadow-sm mt-3 align-items-center rounded-3 p-3 flex-wrap"
               style={{ border: "0.5px solid #ccc" }}
             >
               <Checkbox
@@ -75,21 +75,22 @@ const Cart = () => {
                 className="my-3"
               />
 
-              <div className="ms-3 " style={{ width: "300px" }}>
+              <div className="ms-3" style={{ flex: 1, minWidth: "200px" }}>
                 <h3 className="fw-bold d-block">Corduroy Dual Chest Pocket</h3>
                 <h3 className="text-muted d-block">M</h3>
                 <h3 className="text-muted d-block">Putih</h3>
               </div>
 
-              <div
-                className="input-group wrapInput "
-                style={{ width: "130px" }}
-              >
+              <div className="input-group wrapInput" style={{ width: "130px" }}>
                 <IconButton
                   aria-label="Decrement"
                   onClick={handleDecrement}
-                  style={{ borderRadius: "50%", border: "1px solid #ccc", backgroundColor:"#d4d4d4", color:"white" }}
-
+                  style={{
+                    borderRadius: "50%",
+                    border: "1px solid #ccc",
+                    backgroundColor: "#d4d4d4",
+                    color: "white",
+                  }}
                 >
                   <Remove />
                 </IconButton>
@@ -116,21 +117,21 @@ const Cart = () => {
               <h3 className="ms-auto me-3 fw-bold d-block">Rp. 150.0000</h3>
             </div>
           </Col>
-          <Col>
+          <Col xs={12} md={4}>
             <div
               id="alexa"
-              className="shadow-sm mt-3 rounded-3  w-50"
-              style={{ border: "0.5px solid #ccc", marginLeft: "100px" }}
+              className="shadow-sm mt-3 rounded-3 p-3"
+              style={{ border: "0.5px solid #ccc" }}
             >
-              <h6 className="d-inline-block fw-bold my-3 px-3 ">
+              <h6 className="d-inline-block fw-bold my-3 px-3">
                 Shopping Summary{" "}
                 <span className="text-muted">(2 item Selected)</span>
               </h6>
-              <div className="d-flex justify-between ">
+              <div className="d-flex justify-between">
                 <h6 className="text-red-600 px-3 my-3 text-sm fw-bold text-muted">
                   Total Price
                 </h6>
-                <h6 className="text-red-600 px-3 my-3 text-sm fw-bold ">
+                <h6 className="text-red-600 px-3 my-3 text-sm fw-bold">
                   Rp. 150.0000
                 </h6>
               </div>
@@ -141,7 +142,7 @@ const Cart = () => {
                     backgroundColor: "#DB3022",
                     color: "white",
                     "&:hover": {
-                      backgroundColor: "#E94B32", // ubah warna latar belakang saat dihover
+                      backgroundColor: "#E94B32", // Change background color on hover
                     },
                   }}
                   className="text-center rounded-5 w-75 my-3 border-0"
