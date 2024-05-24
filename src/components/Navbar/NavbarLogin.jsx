@@ -62,11 +62,11 @@ const NavbarLogin = ({id}) => {
                   <Form.Control
                     type="search"
                     placeholder="Search"
-                    className="me-2 w-75  "
+                    className=" w-75  "
                     aria-label="Search"
                   />
                   <div className=" rounded-3  border border-1 border-gray">
-                  <LuFilter size={24} color="gray" className="mt-2"/>
+                  <LuFilter size={24} color="gray" className=""/>
                   </div>
                   
                 </Form>
