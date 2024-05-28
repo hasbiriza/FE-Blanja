@@ -27,7 +27,7 @@ const Carousel2 = () => {
   return (
     <div className="container mt-5">
       <div className="mb-4">
-        <h1 className="m-0">Category</h1>{" "}
+        <h1 className="m-0 text-2xl font-bold">Category</h1>{" "}
         <p className="text-muted">What are you currently looking for? </p>
       </div>
       <Swiper

@@ -34,7 +34,7 @@ const Cards = () => {
   return (
     <>
       <div className="mt-5">
-        <h1 className="m-0">New</h1>
+        <h1 className="m-0 text-2xl font-bold">New</h1>
         <p className="text-muted">You,ve Never Seen it before</p>
       </div>
       <div className="d-flex flex-wrap ">
@@ -70,7 +70,7 @@ const Cards = () => {
                   <Image
                     src={fivestars}
                     alt="bintang lima"
-                    className="border border-danger mt-0 p-0"
+                    className=" mt-0 p-0"
                   />
                 </Card.Body>
               </Card>

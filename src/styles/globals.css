@@ -4,94 +4,35 @@
 @import 'tailwindcss/utilities';
 
 
-/* ============== product detail =========== */
+/* ============== Profile Page =========== */
 
-#product .wrapRight {
-    margin-left: 40px;
-  }
-  
-  #product .chat {
-    width: 160px;
-    border: 1px solid;
-  }
-  
-  #product .chat:hover {
-    color: white;
-    background-color: #9b9b9b;
-  }
-  #product .bag {
-    width: 160px;
-    border: 1px solid;
-    margin: 0 10px;
-  }
-  
-  #product .bag:hover {
-    color: white;
-    background-color: #9b9b9b;
-  }
-  #product .buy {
-    width: 343px;
-    color: white;
-    background-color: #db3022;
-  }
-  #product .buy:hover {
-    color: white;
-    background-color: red;
-  }
-  
-  #product .wrapColor {
-    width: 550px;
-  }
-  #product .color {
-    border: 1px solid;
-    border-color: #b1afaf;
-    background-color: white;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    width: 80px;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  #product .colorBtn {
-    border: 1px solid transparent;
-    border-radius: 50%;
-    height: 46px;
-    width: 44px;
-  }
-  #product .colorBtn:hover {
-    border: 1px solid #db3022;
-    border-radius: 50%;
-  }
-  
-  .colorBlack {
-    margin: -2px;
-    width: 36px;
-    height: 36px;
-    background-color: black;
-    border-radius: 50%;
-  }
-  
-  #product .wrapSize {
-    width: 550px;
-  }
-  #product .size {
-    border: 1px solid;
-    border-color: #b1afaf;
-    background-color: white;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    width: 80px;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  #product .color.selected,
-  #product .size.selected {
-    background-color: #b1afaf;
-  }
-  
-  @media screen and (max-width: 500px) {
-    #product .wrapRight {
-      margin-left: 0;
-    }
-  }
+.profile-container {
+  padding: 20px;
+}
+
+.profile-nav-container {
+  padding: 20px;
+}
+
+.profile-nav-item {
+  padding: 20px;
+}
+
+.profile-nav-link {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.profile-nav-link:hover {
+  color: #007bff;
+}
+
+.profile-content-container {
+  padding: 20px;
+}
   
   /* ============== product detail =========== */
+
+  /* Navbar Login */
+
+  

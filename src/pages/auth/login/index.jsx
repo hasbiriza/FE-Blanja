@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("Customer");
@@ -28,7 +29,13 @@ const Login = () => {
       const response = await axios.post(endpoint, values);
   
       if (response.status === 200) {
-        alert("Login successful!");
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          text: "You have logged in successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         localStorage.setItem("id", response.data.data.ID);
   
         // Set role based on the endpoint

@@ -1,4 +1,4 @@
-import Button from "react-bootstrap/Button";
+import Button from "@mui/material/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -9,15 +9,23 @@ import Image from "next/image";
 import LogoBlanja from "@/assets/Images/LogoBlanja.png";
 import LoginFace from "@/assets/Images/LoginFace.png";
 import Link from "next/link";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { MdOutlineMail } from "react-icons/md";
-import { FiShoppingCart } from "react-icons/fi";
-import { LuFilter } from "react-icons/lu";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { styled } from "@mui/material/styles";
+import { ShoppingCart, Notifications, Mail, FilterList } from "@mui/icons-material";
 
-const NavbarLogin = ({id}) => {
+const IconButton = styled(Button)(({ theme }) => ({
+  minWidth: 0,
+  padding: theme.spacing(0.5),
+  backgroundColor: "transparent",
+  color: "gray",
+  "&:hover": {
+    backgroundColor: "transparent",
+  },
+}));
+
+const NavbarLogin = ({ id }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -33,68 +41,80 @@ const NavbarLogin = ({id}) => {
       });
   }, [id]);
 
-
   return (
     <>
       {["sm"].map((expand) => (
         <Navbar
           collapseOnSelect
           key={expand}
-          expand="md"
-          className="bg-body-tertiary mb-3 shadow-sm  "
+          expand={expand}
+          className="bg-body-tertiary mb-3 shadow-sm"
         >
-          <Container className="">
+          <Container className="d-flex justify-content-between align-items-center">
             <Navbar.Brand as={Link} href="/">
               <Image src={LogoBlanja} alt="logo" />
             </Navbar.Brand>
+            <Form
+              className="d-flex align-items-center border rounded"
+              style={{ maxWidth: "500px", flexGrow: 1 }}
+            >
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="flex-grow-1 border-0"
+                aria-label="Search"
+              />
+              <IconButton>
+                <FilterList />
+              </IconButton>
+            </Form>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
               placement="end"
             >
-              <Offcanvas.Header closeButton className="border border-success ">
+              <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                   Menu
                 </Offcanvas.Title>
               </Offcanvas.Header>
-              <Offcanvas.Body className="">
-                <Form className="d-flex  container-fluid p-0 border border-danger" style={{ maxWidth: '600px' }}>
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className=" w-75  "
-                    aria-label="Search"
-                  />
-                  <div className=" rounded-3  border border-1 border-gray">
-                  <LuFilter size={24} color="gray" className=""/>
-                  </div>
-                  
-                </Form>
-                <Nav className="justify-content-end  pe-3  border  ">
-                  <Nav.Link as={Link} href="#action2" className=" mx-1 ">
-                    <FiShoppingCart size={24} color="gray" />
+              <Offcanvas.Body>
+                <Nav className="justify-content-end align-items-center flex-grow-1">
+                  <Nav.Link as={Link} href="/cart" className="d-flex align-items-center">
+                    <IconButton>
+                      <ShoppingCart />
+                    </IconButton>
                   </Nav.Link>
-                  <Nav.Link as={Link} href="#action2" className=" mx-1 ">
-                    <IoMdNotificationsOutline size={25} color="gray" />
+                  <Nav.Link as={Link} href="#action2" className="d-flex align-items-center">
+                    <IconButton>
+                      <Notifications />
+                    </IconButton>
                   </Nav.Link>
-                  <Nav.Link as={Link} href="#action2" className=" mx-1  ">
-                    <MdOutlineMail size={25} color="gray" />
+                  <Nav.Link as={Link} href="#action2" className="d-flex align-items-center">
+                    <IconButton>
+                      <Mail />
+                    </IconButton>
                   </Nav.Link>
                   <NavDropdown
                     title={
-                      <Image
-                        src={LoginFace}
-                        roundedCircle
-                        alt="LogoLogin"
-                        height={27}
-                        width={27}
-                      />
+                      <div style={{ display: "flex", alignItems: "center", width:"30px" }}>
+                        <Image
+                          src={LoginFace}
+                          roundedCircle
+                          alt="LogoLogin"
+                          height={27}
+                          width={27}
+                        />
+                      </div>
                     }
+                    style={{ display: "flex", alignItems: "center" }}
+                    drop="end"
+                    className="no-caret"
                   >
-                    <NavDropdown.Item href="#action3">
+                    <NavDropdown.Item as={Link} href="/profile">
                       Dashboard
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
+                    <NavDropdown.Item as={Link} href="/profile">
                       Pengaturan Akun
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -102,7 +122,7 @@ const NavbarLogin = ({id}) => {
                       onClick={(e) => {
                         e.preventDefault();
                         localStorage.clear();
-                        window.location.href = "/auth/Login";
+                        window.location.href = "/auth/login";
                       }}
                     >
                       Logout
@@ -114,6 +134,13 @@ const NavbarLogin = ({id}) => {
           </Container>
         </Navbar>
       ))}
+
+      {/* Inline CSS to remove the dropdown arrow */}
+      <style jsx global>{`
+        .no-caret .dropdown-toggle::after {
+          display: none !important;
+        }
+      `}</style>
     </>
   );
 };

@@ -13,7 +13,7 @@ export default function Home() {
   return (
    <>
    <AuthenticatedNavbar/>
-   <div className="container border border-danger ">
+   <div className="container  ">
 
 
    <Carousel/>

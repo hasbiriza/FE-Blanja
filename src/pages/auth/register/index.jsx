@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const RegisterForm = () => {
   const [activeTab, setActiveTab] = useState("Customer");
@@ -26,7 +27,13 @@ const RegisterForm = () => {
       const response = await axios.post(endpoint, values);
 
       if (response.status === 201) {
-        alert(`${activeTab} registration successful!`);
+        Swal.fire({
+          icon: "success",
+          title: "Register Successful",
+          text: "You have successfully Register !",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         alert(`Registration failed: ${response.data.message}`);
       }
