@@ -7,60 +7,45 @@ import Remove from "@mui/icons-material/Remove";
 import Add from "@mui/icons-material/Add";
 import AuthenticatedNavbar from "@/components/Navbar/AuthenticatedNavbar";
 import Popular from "@/components/LandingPage/Popular";
-import nike1 from "@/assets/Images/nike1.png";
-import bintang from "@/assets/Images/bintang.png";
 import axios from "axios";
+import { useCart } from "@/context/CartContext";
+import bintang from "@/assets/Images/bintang.png";
+import Swal from "sweetalert2"; 
 
 const SIZE_OPTIONS = ["XS", "S", "M", "L", "XL", "XXL"];
-
 const COLOR_MAP = {
-  "Hitam": "#000000",
-  "Putih": "#FFFFFF",
-  "Cokelat": "#A52A2A",
-  "Kuning": "#FFFF00",
-  "Hijau": "#008000",
-  "Merah": "#FF0000",
-  "Biru": "#0000FF",
+  Hitam: "#000000",
+  Putih: "#FFFFFF",
+  Cokelat: "#A52A2A",
+  Kuning: "#FFFF00",
+  Hijau: "#008000",
+  Merah: "#FF0000",
+  Biru: "#0000FF",
   "Abu-abu": "#808080",
-  "Ungu": "#800080",
-  "Oranye": "#FFA500"
+  Ungu: "#800080",
+  Oranye: "#FFA500",
 };
 
 const parseColors = (colorString) => {
-  return colorString.split(',')
-    .map(color => color.trim())
-    .map(color => COLOR_MAP[color] || color);
+  return colorString.split(",").map((color) => color.trim());
 };
-
-const PRODUCT = {
-  name: "Corduroy Dual Chest Pockets",
-  brand: "Nike",
-  price: "$ 20.0",
-  colors: ["#FF0000", "#0000FF", "#000000", "#008000"],
-  category: "Shoes",
-  imageUrl: nike1,
-  condition: "New",
-  description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias fugit sapiente culpa perferendis explicabo laudantium at, suscipit similique necessitatibus error.",
-};
-
-
-
-
 
 const ProductDetail = ({ id }) => {
+  const { addToCart } = useCart();
   const [product, setProduct] = useState({});
   const [value, setValue] = useState(1);
   const [selectedColor, setSelectedColor] = useState(null);
   const [size, setSize] = useState("S");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/v1/products/${id}`);
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/products/${id}`
+        );
         const productData = response.data.data;
-        
-        productData.colors = parseColors(productData.color); // Ubah string warna menjadi array
+        productData.colors = parseColors(productData.color);
         setProduct(productData);
       } catch (error) {
         console.error("Error fetching product", error);
@@ -121,8 +106,41 @@ const ProductDetail = ({ id }) => {
     setSelectedColor(color);
   };
 
+  const handleAddToBag = () => {
+    
+    if (!selectedColor) {
+      setError("Please select a color.");
+      return;
+    }
+    if (!size) {
+      setError("Please select a size.");
+      return;
+    }
+
+    const cartItem = {
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      color: selectedColor,
+      size: size,
+      quantity: value,
+      imageUrl: product.product_photo,
+      description: product.product_description,
+      storeName: product.Seller?.seller_storename,
+    };
+
+    addToCart(cartItem);
+    Swal.fire({
+      icon: "success",
+      title: "Add to cart successful!",
+      showConfirmButton: false,
+      timer: 1500, // Durasi notifikasi (dalam milidetik)
+    });
+    setError("");
+  };
+
   const buttonStyle = (color) => ({
-    backgroundColor: color,
+    backgroundColor: COLOR_MAP[color] || color,
     color: "white",
     borderRadius: "50%",
     padding: "8px",
@@ -132,7 +150,7 @@ const ProductDetail = ({ id }) => {
     position: "relative",
     border: "none",
     cursor: "pointer",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Tambahkan bayangan
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)",
   });
 
   const activeBorderStyle = {
@@ -162,33 +180,46 @@ const ProductDetail = ({ id }) => {
               alt={product.name}
               className="my-2"
               layout="responsive"
-              width={150} // Lebar asli gambar
-              height={200} // Tinggi asli gambar
-        
+              width={150}
+              height={200}
             />
           </Col>
 
           <Col md={8} className="px-4">
             <div>
               <h1 className="text-2xl fw-bold mb-2">{product.name}</h1>
-              <h6 className="text-muted">{PRODUCT.brand}</h6>
+              <h6 className="text-muted">{product.Seller?.seller_storename}</h6>
               <Image src={bintang} alt="bintang" className="my-1" />
               <h6 className="text-muted mt-3 mb-1">Price</h6>
-              <h1 className="text-3xl fw-bold mb-2">{product.price}</h1>
+              <h1 className="text-3xl fw-bold mb-2">
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(parseFloat(product.price))}
+              </h1>
             </div>
 
             <div>
               <h6 className="mt-3">Color</h6>
               <div className="d-flex flex-wrap">
-                {product.colors && product.colors.map((color) => (
-                  <div
-                    key={color}
-                    style={selectedColor === color ? { ...buttonStyle(color), position: "relative" } : buttonStyle(color)}
-                    onClick={() => handleColorSelect(color)}
-                  >
-                    {selectedColor === color && <span style={activeBorderStyle}></span>}
-                  </div>
-                ))}
+                {product.colors &&
+                  product.colors.map((color) => (
+                    <div
+                      key={color}
+                      style={
+                        selectedColor === color
+                          ? { ...buttonStyle(color), position: "relative" }
+                          : buttonStyle(color)
+                      }
+                      onClick={() => handleColorSelect(color)}
+                    >
+                      {selectedColor === color && (
+                        <span style={activeBorderStyle}></span>
+                      )}
+                    </div>
+                  ))}
               </div>
             </div>
 
@@ -229,9 +260,9 @@ const ProductDetail = ({ id }) => {
                 </div>
               </div>
 
-              <div className="ms-4 ">
+              <div className="ms-5">
                 <h6 className="fw-bold mb-1">Size</h6>
-                <div className="input-group  " style={{ width: "130px" }}>
+                <div className="input-group" style={{ width: "130px" }}>
                   <IconButton
                     aria-label="Decrement"
                     onClick={handleSizeDecrement}
@@ -266,6 +297,8 @@ const ProductDetail = ({ id }) => {
               </div>
             </div>
 
+            {error && <p className="text-danger">{error}</p>}
+
             <div className="d-flex flex-wrap justify-content-between align-items-center my-4">
               <Button
                 variant="outlined"
@@ -286,6 +319,7 @@ const ProductDetail = ({ id }) => {
                   minWidth: "130px",
                   margin: "5px",
                 }}
+                onClick={handleAddToBag}
               >
                 Add Bag
               </Button>
@@ -312,7 +346,7 @@ const ProductDetail = ({ id }) => {
         <Row className="mt-3">
           <h1 className="fw-bold">Informasi Produk</h1>
           <h3 className="fw-bold mt-4">Condition</h3>
-          <h3 className="text-red-600">{PRODUCT.condition}</h3>
+          <h3 className="text-red-600">{product.condition}</h3>
           <h3 className="fw-bold mt-2">Description</h3>
           <p className="text-muted mt-1">{product.product_description}</p>
         </Row>
