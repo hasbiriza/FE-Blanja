@@ -12,6 +12,26 @@ import bintang from "@/assets/Images/bintang.png";
 import axios from "axios";
 
 const SIZE_OPTIONS = ["XS", "S", "M", "L", "XL", "XXL"];
+
+const COLOR_MAP = {
+  "Hitam": "#000000",
+  "Putih": "#FFFFFF",
+  "Cokelat": "#A52A2A",
+  "Kuning": "#FFFF00",
+  "Hijau": "#008000",
+  "Merah": "#FF0000",
+  "Biru": "#0000FF",
+  "Abu-abu": "#808080",
+  "Ungu": "#800080",
+  "Oranye": "#FFA500"
+};
+
+const parseColors = (colorString) => {
+  return colorString.split(',')
+    .map(color => color.trim())
+    .map(color => COLOR_MAP[color] || color);
+};
+
 const PRODUCT = {
   name: "Corduroy Dual Chest Pockets",
   brand: "Nike",
@@ -24,6 +44,10 @@ const PRODUCT = {
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias fugit sapiente culpa perferendis explicabo laudantium at, suscipit similique necessitatibus error.",
 };
 
+
+
+
+
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState({});
   const [value, setValue] = useState(1);
@@ -33,10 +57,11 @@ const ProductDetail = ({ id }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/api/v1/products/${id}`
-        );
-        setProduct(response.data.data);
+        const response = await axios.get(`http://localhost:8080/api/v1/products/${id}`);
+        const productData = response.data.data;
+        
+        productData.colors = parseColors(productData.color); // Ubah string warna menjadi array
+        setProduct(productData);
       } catch (error) {
         console.error("Error fetching product", error);
       }
@@ -50,9 +75,9 @@ const ProductDetail = ({ id }) => {
       product.Category?.category_name === "Shoes" ||
       product.Category?.category_name === "Socks"
     ) {
-      setSize(38);
+      setSize(42);
     } else {
-      setSize("S");
+      setSize("M");
     }
   }, [product]);
 
@@ -107,6 +132,7 @@ const ProductDetail = ({ id }) => {
     position: "relative",
     border: "none",
     cursor: "pointer",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Tambahkan bayangan
   });
 
   const activeBorderStyle = {
@@ -154,19 +180,13 @@ const ProductDetail = ({ id }) => {
             <div>
               <h6 className="mt-3">Color</h6>
               <div className="d-flex flex-wrap">
-                {PRODUCT.colors.map((color) => (
+                {product.colors && product.colors.map((color) => (
                   <div
                     key={color}
-                    style={
-                      selectedColor === color
-                        ? { ...buttonStyle(color), position: "relative" }
-                        : buttonStyle(color)
-                    }
+                    style={selectedColor === color ? { ...buttonStyle(color), position: "relative" } : buttonStyle(color)}
                     onClick={() => handleColorSelect(color)}
                   >
-                    {selectedColor === color && (
-                      <span style={activeBorderStyle}></span>
-                    )}
+                    {selectedColor === color && <span style={activeBorderStyle}></span>}
                   </div>
                 ))}
               </div>

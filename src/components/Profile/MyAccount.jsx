@@ -84,9 +84,9 @@ const MyAccount = () => {
           text: "Account updated successfully!",
           icon: "success",
           confirmButtonText: "OK",
-        }).then(() => {
-          // Reload the page after the alert is closed
-          window.location.reload();
+        // }).then(() => {
+        //   // Reload the page after the alert is closed
+        //   window.location.reload();
         });
       } catch (error) {
         console.error("Error updating data:", error);
