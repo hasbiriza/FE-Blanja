@@ -41,13 +41,13 @@ const Carousel2 = () => {
         onSlideChange
         onSwiper={(swiper) => console.log(swiper)}
         breakpoints={{
-          300: {
+          400: {
             slidesPerView: 1,
           },
 
           768: {
-            slidesPerView: 3,
-            spaceBetween: 20,
+            slidesPerView: 2,
+            spaceBetween: 5,
           },
           980: {
             slidesPerView: 5,

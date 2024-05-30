@@ -195,9 +195,6 @@ const Cart = () => {
             >
               <h6 className="d-inline-block fw-bold my-3 px-3">
                 Shopping Summary{" "}
-                <span className="text-muted">
-                  ({cart.length} item(s) selected)
-                </span>
               </h6>
               <div className="d-flex justify-between">
                 <h6 className="text-red-600 px-3 my-3 text-sm fw-bold text-muted">
