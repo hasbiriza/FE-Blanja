@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import AuthenticatedNavbar from "@/components/Navbar/AuthenticatedNavbar";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "@mui/material/Button";
@@ -10,8 +11,9 @@ import Add from "@mui/icons-material/Add";
 import { useCart } from "@/context/CartContext";
 
 const Cart = () => {
-  const { cart, setCart, removeFromCart } = useCart(); // Add removeFromCart to the destructuring
+  const { cart, setCart, setItemsForCheckout } = useCart(); // Pastikan setItemsForCheckout tersedia
   const [selectedItems, setSelectedItems] = useState([]);
+  const router = useRouter();
 
   const handleDecrement = (index) => {
     const updatedCart = cart.map((item, i) =>
@@ -43,6 +45,12 @@ const Cart = () => {
     );
     setCart(updatedCart);
     setSelectedItems([]);
+  };
+
+  const handleBuySelected = () => {
+    const itemsToCheckout = cart.filter((_, index) => selectedItems.includes(index));
+    setItemsForCheckout(itemsToCheckout);
+    router.push("/checkout"); // Arahkan ke halaman checkout
   };
 
   return (
@@ -214,21 +222,21 @@ const Cart = () => {
                   )}
                 </h6>
               </div>
-              <div className="d-flex justify-center">
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#DB3022",
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "#E94B32",
-                    },
-                  }}
-                  className="text-center rounded-5 w-75 my-3 border-0"
-                >
-                  Buy
-                </Button>
-              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={handleBuySelected} // Panggil handleBuySelected
+                sx={{
+                  textTransform: "capitalize",
+                  backgroundColor: "#db3022",
+                  "&:hover": {
+                    backgroundColor: "#a4261d",
+                  },
+                }}
+              >
+                Buy
+              </Button>
             </div>
           </Col>
         </Row>

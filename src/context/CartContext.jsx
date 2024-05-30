@@ -9,6 +9,7 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [checkoutItems, setCheckoutItems] = useState([]); // Tambahkan state untuk checkout
 
   const addToCart = (item) => {
     setCart((prevCart) => [...prevCart, item]);
@@ -22,8 +23,12 @@ export const CartProvider = ({ children }) => {
     setCart([]);
   };
 
+  const setItemsForCheckout = (items) => {
+    setCheckoutItems(items); // Fungsi untuk menyetel item checkout
+  };
+
   return (
-    <CartContext.Provider value={{ cart, setCart, addToCart, removeFromCart, removeAllFromCart }}>
+    <CartContext.Provider value={{ cart, setCart, addToCart, removeFromCart, removeAllFromCart, checkoutItems, setItemsForCheckout }}>
       {children}
     </CartContext.Provider>
   );
