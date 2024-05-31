@@ -1,28 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 <br />
 <p align="center">
@@ -60,9 +38,11 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 The Blanja e-commerce website project is an online platform designed to make it easier for users to make buying and selling transactions online. This website was developed using Next.js and Context frontend technologies to optimize display performance and efficiency as well as state management. On the backend, this website uses Golang with Fiber Framework technology which functions as a server to manage data taken from Cloudinary. Cloudinary functions as an image data store so that it allows users to easily view images of each product being sold.
 
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 ### Built With
 
-- [Redux](https://tailwindcss.com/)
+- [Tailwind](https://tailwindcss.com/)
 - [Context](https://redux.js.org/)
 - [Bootstrap Css](https://getbootstrap.com/)
 - [Next.js](https://nextjs.org/)
@@ -72,6 +52,28 @@ The Blanja e-commerce website project is an online platform designed to make it 
 <!-- GETTING STARTED -->
 
 ## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ### Prerequisites
 
