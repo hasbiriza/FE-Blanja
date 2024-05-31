@@ -58,13 +58,14 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## About The Project
 
-The Blanja e-commerce website project is an online platform designed to make it easier for users to make buying and selling transactions online. This website was developed using React.js and Redux frontend technologies to optimize display performance and efficiency as well as state management. On the backend, this website uses Express.js technology which functions as a server to manage data taken from Cloudinary. Cloudinary functions as an image data store so that it allows users to easily view images of each product being sold.
+The Blanja e-commerce website project is an online platform designed to make it easier for users to make buying and selling transactions online. This website was developed using Next.js and Context frontend technologies to optimize display performance and efficiency as well as state management. On the backend, this website uses Golang with Fiber Framework technology which functions as a server to manage data taken from Cloudinary. Cloudinary functions as an image data store so that it allows users to easily view images of each product being sold.
 
 ### Built With
 
-- [Redux](https://redux.js.org/)
+- [Redux](https://tailwindcss.com/)
+- [Context](https://redux.js.org/)
 - [Bootstrap Css](https://getbootstrap.com/)
-- [React js](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
 - [Cloudinary](https://cloudinary.com/)
 - and other
 
