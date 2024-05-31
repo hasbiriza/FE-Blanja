@@ -80,8 +80,6 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 This is an example of how to list things you need to use the software and how to install them.
 - [VS Code](https://code.visualstudio.com/)
 - [nextjs](https://nextjs.org/)
-- [React js](https://reactjs.org/)
-
 
 ### Installation
 
@@ -197,8 +195,6 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend E-Commerce Blanja Online Shop`](https://github.com/sandriirawan/Be_Blanja)
-
-:rocket: [`Frontend E-Commerce Blanja Online Shop`](https://github.com/sandriirawan/Fe_Blanja_React)
+:rocket: [`Backend E-Commerce Blanja Online Shop`](https://github.com/hasbiriza/BE-Blanja)
 
 :rocket: [`Demo E-Commerce Blanja Online Shop`](https://blanja-delta.vercel.app/home)
