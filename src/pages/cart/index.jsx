@@ -11,7 +11,7 @@ import Add from "@mui/icons-material/Add";
 import { useCart } from "@/context/CartContext";
 
 const Cart = () => {
-  const { cart, setCart, setItemsForCheckout } = useCart(); // Pastikan setItemsForCheckout tersedia
+  const { cart, setCart, setItemsForCheckout } = useCart();
   const [selectedItems, setSelectedItems] = useState([]);
   const router = useRouter();
 
@@ -50,7 +50,7 @@ const Cart = () => {
   const handleBuySelected = () => {
     const itemsToCheckout = cart.filter((_, index) => selectedItems.includes(index));
     setItemsForCheckout(itemsToCheckout);
-    router.push("/checkout"); // Arahkan ke halaman checkout
+    router.push("/checkout");
   };
 
   return (
@@ -226,7 +226,7 @@ const Cart = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
-                onClick={handleBuySelected} // Panggil handleBuySelected
+                onClick={handleBuySelected}
                 sx={{
                   textTransform: "capitalize",
                   backgroundColor: "#db3022",

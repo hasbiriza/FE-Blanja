@@ -5,16 +5,23 @@ import { Col, Container, Row, Modal } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import Image from "next/image";
 import axios from "axios";
-import { Radio, Box, Typography } from "@mui/material";
+import { Checkbox, Box, Typography, IconButton } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 import ShippingAddress from "@/components/Profile/ShippingAddress";
+import creditcardlogo from "@/assets/Images/creditcard.png"
+import gopaylogo from "@/assets/Images/gopay.jpg"
+import danalogo from "@/assets/Images/dana.png"
 
 const Checkout = () => {
   const { checkoutItems } = useCart();
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [showAddressModal, setShowAddressModal] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [addresses, setAddresses] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null); 
   const customerId = localStorage.getItem("id");
 
   useEffect(() => {
@@ -27,17 +34,17 @@ const Checkout = () => {
       {
         id: 1,
         name: "Credit Card",
-        logo: "https://via.placeholder.com/50",
+        logo: creditcardlogo, // <-- Use the imported variable here
       },
       {
         id: 2,
-        name: "PayPal",
-        logo: "https://via.placeholder.com/50",
+        name: "GoPay", 
+        logo: gopaylogo, // <-- Use the imported variable here
       },
       {
         id: 3,
-        name: "Bank Transfer",
-        logo: "https://via.placeholder.com/50",
+        name: "Dana", 
+        logo: danalogo, // <-- Use the imported variable here
       },
     ]);
   }, []);
@@ -54,14 +61,22 @@ const Checkout = () => {
     setShowModal(false);
   };
 
-
-  const handleAddresShowModal = () => {
-    setShowModal(true);
+  const handleShowAddressModal = () => {
+    setShowAddressModal(true);
   };
 
-  const handleAddresCloseModal = () => {
-    setShowModal(false);
+  const handleCloseAddressModal = () => {
+    setShowAddressModal(false);
   };
+
+  const handleSelectAddress = (index) => {
+    setSelectedAddressIndex(index); // Set the index, not just the ID
+    setSelectedAddress(addresses[index].id); // Also update the selectedAddress ID
+  };
+
+ 
+
+
 
   const totalProductPrice = checkoutItems.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -96,7 +111,7 @@ const Checkout = () => {
           <Col xs={12} md={8}>
             <h1 className="fw-bold text-4xl">Checkout</h1>
             <div className="border">
-            <Button
+              <Button
                 variant="contained"
                 color="primary"
                 fullWidth
@@ -107,9 +122,9 @@ const Checkout = () => {
                     backgroundColor: "#a4261d",
                   },
                 }}
-                onClick={handleAddresShowModal}
+                onClick={handleShowAddressModal}
               >
-                Select Payment
+                Select Address
               </Button>
             </div>
 
@@ -239,30 +254,122 @@ const Checkout = () => {
           <Modal.Title>Select Payment Method</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h5>Payment Methods</h5>
-          <div className="d-flex flex-column">
-            {paymentMethods.map((method) => (
-              <div key={method.id} className="d-flex align-items-center my-2">
-                <Image
-                  src={method.logo}
-                  alt={method.name}
-                  width={50}
-                  height={50}
-                />
-                <span className="ms-3">{method.name}</span>
-                <Radio
-                  checked={selectedPaymentMethod === method.id}
-                  onChange={() => handleSelectPaymentMethod(method.id)}
-                  value={method.id}
-                  name="payment-method"
-                />
-              </div>
-            ))}
+          <h5 className="fw-bold">Payment Methods</h5>
+          {paymentMethods.map((method) => (
+            <div key={method.id} className="flex items-center my-2">
+              <Image
+                src={method.logo}
+                alt={method.name}
+                width={50}
+                height={50}
+              />
+              <span className="ms-3">{method.name}</span>
+              <Checkbox
+                checked={selectedPaymentMethod === method.id}
+                onChange={() => handleSelectPaymentMethod(method.id)}
+                value={method.id}
+                className="ms-auto"
+                name="payment-method"
+                sx={{ color: "#db3022", ml: 2 }}
+              />
+            </div>
+          ))}
+          <div
+            id="order-summary"
+            className="shadow-sm mt-3 rounded-3"
+          >
+            <h6 className="d-inline-block fw-bold my-3">
+              Order Summary
+            </h6>
+            <div className="d-flex justify-content-between">
+              <h6 className="text-sm fw-bold text-muted">
+                Total Product Price
+              </h6>
+              <h6 className="mt-1 text-sm fw-bold">
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(totalProductPrice)}
+              </h6>
+            </div>
+            <div className="d-flex justify-content-between">
+              <h6 className="my-3 text-sm fw-bold text-muted">
+                Delivery
+              </h6>
+              <h6 className="my-3 text-sm fw-bold">
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(deliveryCost)}
+              </h6>
+            </div>
+            <hr />
+            <div className="d-flex justify-content-between">
+              <h6 className="my-3 text-sm fw-bold text-muted">
+                Total Price
+              </h6>
+              <h6 className="my-3 text-sm fw-bold">
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(totalPrice)}
+              </h6>
+            </div>
           </div>
           <Button
             variant="contained"
             color="primary"
             onClick={handleCloseModal}
+          >
+            Confirm
+          </Button>
+        </Modal.Body>
+      </Modal>
+
+      {/* Modal for Address Selection */}
+      <Modal show={showAddressModal} onHide={handleCloseAddressModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Select Address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {addresses.map((address, index) => (
+            <Box
+              key={index}
+              sx={{
+                border: "1px solid red",
+                padding: 2,
+                marginY: 2,
+                position: "relative",
+              }}
+            >
+              
+              <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                Recipient Name: {address.recipient_name}
+              </Typography>
+              <Typography variant="body2">
+                Address: {address.address}, {address.city}, {address.postal_code}
+              </Typography>
+              <Typography variant="body2">Phone: {address.recipient_phone}</Typography>
+              <Checkbox
+                checked={selectedAddressIndex === index}
+                onChange={() => handleSelectAddress(index)}
+                value={address.id}
+                className="ms-auto"
+                name="address"
+                sx={{ color: "#db3022", ml: 2 }}
+              />
+            </Box>
+          ))}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleCloseAddressModal}
           >
             Confirm
           </Button>

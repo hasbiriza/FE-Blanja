@@ -1,5 +1,6 @@
 // context/CartContext.js
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 const CartContext = createContext();
 
@@ -9,7 +10,20 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [checkoutItems, setCheckoutItems] = useState([]); // Tambahkan state untuk checkout
+  const [checkoutItems, setCheckoutItems] = useState([]);
+
+  useEffect(() => {
+    // Load cart from cookies on mount
+    const savedCart = Cookies.get('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save cart to cookies whenever it changes
+    Cookies.set('cart', JSON.stringify(cart), { expires: 7 });
+  }, [cart]);
 
   const addToCart = (item) => {
     setCart((prevCart) => [...prevCart, item]);
@@ -24,7 +38,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const setItemsForCheckout = (items) => {
-    setCheckoutItems(items); // Fungsi untuk menyetel item checkout
+    setCheckoutItems(items);
   };
 
   return (
