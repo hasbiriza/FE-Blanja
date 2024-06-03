@@ -1,28 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 <br />
 <p align="center">
@@ -58,13 +36,16 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## About The Project
 
-The Blanja e-commerce website project is an online platform designed to make it easier for users to make buying and selling transactions online. This website was developed using React.js and Redux frontend technologies to optimize display performance and efficiency as well as state management. On the backend, this website uses Express.js technology which functions as a server to manage data taken from Cloudinary. Cloudinary functions as an image data store so that it allows users to easily view images of each product being sold.
+The Blanja e-commerce website project is an online platform designed to make it easier for users to make buying and selling transactions online. This website was developed using Next.js and Context frontend technologies to optimize display performance and efficiency as well as state management. On the backend, this website uses Golang with Fiber Framework technology which functions as a server to manage data taken from Cloudinary. Cloudinary functions as an image data store so that it allows users to easily view images of each product being sold.
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ### Built With
 
-- [Redux](https://redux.js.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Context](https://redux.js.org/)
 - [Bootstrap Css](https://getbootstrap.com/)
-- [React js](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
 - [Cloudinary](https://cloudinary.com/)
 - and other
 
@@ -72,13 +53,33 @@ The Blanja e-commerce website project is an online platform designed to make it 
 
 ## Getting Started
 
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 - [VS Code](https://code.visualstudio.com/)
 - [nextjs](https://nextjs.org/)
-- [React js](https://reactjs.org/)
-
 
 ### Installation
 
@@ -137,7 +138,7 @@ REACT_APP_BACKEND = [BACKEND_URL]
     <td>Register Seller</td>
   </tr>
   <tr>
-    <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/fdd9fde8-f9dd-4d81-9896-c14bb8ad6528" border="0" alt="3" /> </td>
+    <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/home_ss.png" border="0" alt="3" /> </td>
      <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/f0dbf92a-7c54-4917-a5a6-c1d81af52505"  border="0" alt="4" /></td>
   </tr>
    <tr>
@@ -146,8 +147,8 @@ REACT_APP_BACKEND = [BACKEND_URL]
   </tr>
 
   <tr>
-    <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/5d89eebe-4eb3-4e0a-ae58-7a0ce8520404" border="0" alt="3" /> </td>
-     <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/3efdfdbb-ce56-430b-ac72-d7df1777839d"  border="0" alt="4" /></td>
+    <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/detailProduct_ss.png" border="0" alt="3" /> </td>
+     <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/Cart_ss.png"  border="0" alt="4" /></td>
   </tr>
    <tr>
     <td>Detail Product</td>
@@ -194,8 +195,6 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend E-Commerce Blanja Online Shop`](https://github.com/sandriirawan/Be_Blanja)
-
-:rocket: [`Frontend E-Commerce Blanja Online Shop`](https://github.com/sandriirawan/Fe_Blanja_React)
+:rocket: [`Backend E-Commerce Blanja Online Shop`](https://github.com/hasbiriza/BE-Blanja)
 
 :rocket: [`Demo E-Commerce Blanja Online Shop`](https://blanja-delta.vercel.app/home)
