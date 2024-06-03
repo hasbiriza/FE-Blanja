@@ -121,8 +121,8 @@ REACT_APP_BACKEND = [BACKEND_URL]
 
 <table>
  <tr>
-    <td><img width="350px" src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/f200a7b9-264b-49df-85e7-f4b9c4755842" border="0" alt="1" /></td>
-    <td> <img width="350px" src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/278427ab-7a4a-4501-8a5b-2dc6db37113d"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/loginCustomer_ss.png" border="0" alt="1" /></td>
+    <td> <img width="350px" src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/loginSeller_ss.png"  border="0"  alt="2" /></td>
   </tr>
    <tr>
     <td>Login Customer</td>
@@ -130,7 +130,7 @@ REACT_APP_BACKEND = [BACKEND_URL]
   </tr>
 
   <tr>
-    <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/61e09bb4-1fc9-47ac-9e35-dfbb6e5858ba" border="0" alt="3" /> </td>
+    <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/registerCustomer_ss.png" border="0" alt="3" /> </td>
      <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/d1e44a55-7b23-450e-a2d2-7952b3734427"  border="0" alt="4" /></td>
   </tr>
    <tr>
