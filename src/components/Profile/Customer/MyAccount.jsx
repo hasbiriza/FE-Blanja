@@ -16,13 +16,9 @@ import * as yup from "yup";
 import Swal from "sweetalert2"; // Import SweetAlert
 
 const MyAccount = () => {
-  const [initialValues, setInitialValues] = useState({
-    customer_name: "",
-    email: "",
-    customer_phone: "",
-    gender: "",
-    birthday: "",
-  });
+  const [user, setUser] = useState({});
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,15 +27,7 @@ const MyAccount = () => {
         const response = await axios.get(
           `http://localhost:8080/api/v1/customers/${id}`
         );
-        const { customer_name, email, customer_phone, gender, birthday } =
-          response.data.data;
-        setInitialValues({
-          customer_name,
-          email,
-          customer_phone,
-          gender: gender.toLowerCase(), // Ensure gender is lowercase
-          birthday,
-        });
+        setUser(response.data.data);
       } catch (error) {
         console.error("Error fetching initial values:", error);
       }
@@ -69,28 +57,34 @@ const MyAccount = () => {
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues,
+    initialValues: {
+      customer_name: user.customer_name || "",
+      email: user.email || "",
+      customer_phone: user.customer_phone || "",
+      gender: user.gender ? user.gender.toLowerCase() : "",
+      birthday: user.birthday || "",
+    },
     validationSchema,
     onSubmit: async (values) => {
       const id = localStorage.getItem("id");
+      const data = { ...values, gender: values.gender.toUpperCase() };
+      if (selectedImage) {
+        data.photo = selectedImage;
+      }
       try {
-        await axios.put(`http://localhost:8080/api/v1/customers/${id}`, {
-          ...values,
-          gender: values.gender.toUpperCase(), // Ensure gender is uppercase
+        await axios.put(`http://localhost:8080/api/v1/customers/${id}`, data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         });
-        // Use SweetAlert for a successful submission
         Swal.fire({
           title: "Success!",
           text: "Account updated successfully!",
           icon: "success",
           confirmButtonText: "OK",
-        // }).then(() => {
-        //   // Reload the page after the alert is closed
-        //   window.location.reload();
         });
       } catch (error) {
         console.error("Error updating data:", error);
-        // Use SweetAlert for an error during submission
         Swal.fire({
           title: "Error!",
           text: "An error occurred during updating",
@@ -100,6 +94,12 @@ const MyAccount = () => {
       }
     },
   });
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    setPreviewImage(URL.createObjectURL(file));
+  };
 
   return (
     <div className="border-1 border-gray-400 rounded-lg p-3">
@@ -120,8 +120,13 @@ const MyAccount = () => {
                 value={formik.values.customer_name}
                 onChange={formik.handleChange}
                 fullWidth
-                error={formik.touched.customer_name && Boolean(formik.errors.customer_name)}
-                helperText={formik.touched.customer_name && formik.errors.customer_name}
+                error={
+                  formik.touched.customer_name &&
+                  Boolean(formik.errors.customer_name)
+                }
+                helperText={
+                  formik.touched.customer_name && formik.errors.customer_name
+                }
               />
             </div>
             <div className="flex items-center  my-3 p-2">
@@ -139,9 +144,7 @@ const MyAccount = () => {
               />
             </div>
             <div className="flex items-center  my-3 p-2">
-              <h6 className="text-gray-500 block w-[30%] ">
-                Phone number
-              </h6>
+              <h6 className="text-gray-500 block w-[30%] ">Phone number</h6>
               <TextField
                 name="customer_phone"
                 type="text"
@@ -150,8 +153,13 @@ const MyAccount = () => {
                 value={formik.values.customer_phone}
                 onChange={formik.handleChange}
                 fullWidth
-                error={formik.touched.customer_phone && Boolean(formik.errors.customer_phone)}
-                helperText={formik.touched.customer_phone && formik.errors.customer_phone}
+                error={
+                  formik.touched.customer_phone &&
+                  Boolean(formik.errors.customer_phone)
+                }
+                helperText={
+                  formik.touched.customer_phone && formik.errors.customer_phone
+                }
               />
             </div>
             <div className="flex items-center  my-3 p-2">
@@ -193,7 +201,9 @@ const MyAccount = () => {
                 value={formik.values.birthday}
                 onChange={formik.handleChange}
                 fullWidth
-                error={formik.touched.birthday && Boolean(formik.errors.birthday)}
+                error={
+                  formik.touched.birthday && Boolean(formik.errors.birthday)
+                }
                 helperText={formik.touched.birthday && formik.errors.birthday}
               />
             </div>
@@ -203,16 +213,29 @@ const MyAccount = () => {
             sm={3}
             className="d-flex justify-content-center align-items-center flex-column border-l-2 border-gray-700"
           >
-            <Image src={LoginFace} alt="LoginFace" width={100} height={100} />
+            <Image
+              src={previewImage || user.photo || LoginFace}
+              alt="LoginFace"
+              width={80}
+              height={80}
+              className="rounded-full border"
+            />
             <Button
               className="mt-3"
               variant="outlined"
+              component="label"
               sx={{
                 borderRadius: "15px",
                 border: "1px solid #262626",
               }}
             >
               Select Image
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                onChange={handleImageChange}
+              />
             </Button>
           </Col>
         </Row>

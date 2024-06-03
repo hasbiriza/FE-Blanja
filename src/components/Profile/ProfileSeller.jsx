@@ -47,7 +47,7 @@ const ProfileCustomer = () => {
               style={{ marginLeft: "20%" }}
             >
               <div className="d-flex ">
-                <Image src={customer.photo || LoginFace} alt="LoginFace" width={30} height={30}  className="rounded-full border"/>
+                <Image src={LoginFace} alt="LoginFace" width={50} height={50} />
                 <div className="ms-2">
                   <h3 className="fw-bold text-sm">{customer.customer_name}</h3>
                   <h3 className="text-xs">Ubah Profile</h3>

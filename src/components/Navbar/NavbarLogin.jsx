@@ -28,18 +28,20 @@ const IconButton = styled(Button)(({ theme }) => ({
 const NavbarLogin = ({ id }) => {
   const [user, setUser] = useState({});
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/v1/customers/${id}`)
-      .then((res) => {
-        const user = res.data.data;
-        setUser(user);
-        console.log(user);
-      })
-      .catch((err) => {
-        console.error("Error fetching users:", err);
-      });
-  }, [id]);
+ useEffect(() => {
+  const fetchUserPhoto = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/v1/customers/${id}`);
+      const userData = response.data.data;
+      setUser(userData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  fetchUserPhoto();
+}, [id]);
+
 
   return (
     <>
@@ -52,7 +54,7 @@ const NavbarLogin = ({ id }) => {
         >
           <Container className="d-flex justify-content-between align-items-center">
             <Navbar.Brand as={Link} href="/">
-              <Image src={LogoBlanja} alt="logo" />
+              <Image src={LogoBlanja }  alt="logo" />
             </Navbar.Brand>
             <Form
               className="d-flex align-items-center border rounded"
@@ -99,11 +101,12 @@ const NavbarLogin = ({ id }) => {
                     title={
                       <div style={{ display: "flex", alignItems: "center", width:"30px" }}>
                         <Image
-                          src={LoginFace}
+                          src={user.photo || LoginFace}
                           roundedCircle
                           alt="LogoLogin"
                           height={27}
                           width={27}
+                          className="rounded-full border"
                         />
                       </div>
                     }
@@ -111,9 +114,6 @@ const NavbarLogin = ({ id }) => {
                     drop="end"
                     className="no-caret"
                   >
-                    <NavDropdown.Item as={Link} href="/profile">
-                      Dashboard
-                    </NavDropdown.Item>
                     <NavDropdown.Item as={Link} href="/profile">
                       Pengaturan Akun
                     </NavDropdown.Item>

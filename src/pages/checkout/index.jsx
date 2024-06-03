@@ -7,10 +7,10 @@ import Image from "next/image";
 import axios from "axios";
 import { Checkbox, Box, Typography, IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
-import ShippingAddress from "@/components/Profile/ShippingAddress";
-import creditcardlogo from "@/assets/Images/creditcard.png"
-import gopaylogo from "@/assets/Images/gopay.jpg"
-import danalogo from "@/assets/Images/dana.png"
+import ShippingAddress from "@/components/Profile/Customer/ShippingAddress";
+import creditcardlogo from "@/assets/Images/creditcard.png";
+import gopaylogo from "@/assets/Images/gopay.jpg";
+import danalogo from "@/assets/Images/dana.png";
 
 const Checkout = () => {
   const { checkoutItems } = useCart();
@@ -21,8 +21,7 @@ const Checkout = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
-  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null); 
-  const customerId = localStorage.getItem("id");
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
 
   useEffect(() => {
     const deliveryCosts = [8000, 9000, 10000, 11000, 12000];
@@ -38,12 +37,12 @@ const Checkout = () => {
       },
       {
         id: 2,
-        name: "GoPay", 
+        name: "GoPay",
         logo: gopaylogo, // <-- Use the imported variable here
       },
       {
         id: 3,
-        name: "Dana", 
+        name: "Dana",
         logo: danalogo, // <-- Use the imported variable here
       },
     ]);
@@ -74,10 +73,6 @@ const Checkout = () => {
     setSelectedAddress(addresses[index].id); // Also update the selectedAddress ID
   };
 
- 
-
-
-
   const totalProductPrice = checkoutItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -85,14 +80,16 @@ const Checkout = () => {
 
   const totalPrice = totalProductPrice + deliveryCost;
 
+  
   useEffect(() => {
+    const Id = localStorage.getItem("id");
     const fetchAddresses = async () => {
       try {
         const response = await axios.get(
           "http://localhost:8080/api/v1/addresses"
         );
         const filteredAddresses = response.data.data.filter(
-          (address) => address.customer_id == customerId
+          (address) => address.customer_id == Id
         );
         setAddresses(filteredAddresses);
       } catch (error) {
@@ -101,7 +98,7 @@ const Checkout = () => {
     };
 
     fetchAddresses();
-  }, [customerId]);
+  }, []);
 
   return (
     <>
@@ -274,13 +271,8 @@ const Checkout = () => {
               />
             </div>
           ))}
-          <div
-            id="order-summary"
-            className="shadow-sm mt-3 rounded-3"
-          >
-            <h6 className="d-inline-block fw-bold my-3">
-              Order Summary
-            </h6>
+          <div id="order-summary" className="shadow-sm mt-3 rounded-3">
+            <h6 className="d-inline-block fw-bold my-3">Order Summary</h6>
             <div className="d-flex justify-content-between">
               <h6 className="text-sm fw-bold text-muted">
                 Total Product Price
@@ -295,9 +287,7 @@ const Checkout = () => {
               </h6>
             </div>
             <div className="d-flex justify-content-between">
-              <h6 className="my-3 text-sm fw-bold text-muted">
-                Delivery
-              </h6>
+              <h6 className="my-3 text-sm fw-bold text-muted">Delivery</h6>
               <h6 className="my-3 text-sm fw-bold">
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
@@ -309,9 +299,7 @@ const Checkout = () => {
             </div>
             <hr />
             <div className="d-flex justify-content-between">
-              <h6 className="my-3 text-sm fw-bold text-muted">
-                Total Price
-              </h6>
+              <h6 className="my-3 text-sm fw-bold text-muted">Total Price</h6>
               <h6 className="my-3 text-sm fw-bold">
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
@@ -348,14 +336,16 @@ const Checkout = () => {
                 position: "relative",
               }}
             >
-              
               <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                 Recipient Name: {address.recipient_name}
               </Typography>
               <Typography variant="body2">
-                Address: {address.address}, {address.city}, {address.postal_code}
+                Address: {address.address}, {address.city},{" "}
+                {address.postal_code}
               </Typography>
-              <Typography variant="body2">Phone: {address.recipient_phone}</Typography>
+              <Typography variant="body2">
+                Phone: {address.recipient_phone}
+              </Typography>
               <Checkbox
                 checked={selectedAddressIndex === index}
                 onChange={() => handleSelectAddress(index)}
