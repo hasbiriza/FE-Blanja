@@ -121,8 +121,8 @@ REACT_APP_BACKEND = [BACKEND_URL]
 
 <table>
  <tr>
-    <td><img width="350px" src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/loginCustomer_ss.png" border="0" alt="1" /></td>
-    <td> <img width="350px" src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/loginSeller_ss.png"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/f200a7b9-264b-49df-85e7-f4b9c4755842" border="0" alt="1" /></td>
+    <td> <img width="350px" src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/278427ab-7a4a-4501-8a5b-2dc6db37113d"  border="0"  alt="2" /></td>
   </tr>
    <tr>
     <td>Login Customer</td>
@@ -130,7 +130,7 @@ REACT_APP_BACKEND = [BACKEND_URL]
   </tr>
 
   <tr>
-    <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/registerCustomer_ss.png" border="0" alt="3" /> </td>
+    <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/61e09bb4-1fc9-47ac-9e35-dfbb6e5858ba" border="0" alt="3" /> </td>
      <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/d1e44a55-7b23-450e-a2d2-7952b3734427"  border="0" alt="4" /></td>
   </tr>
    <tr>
@@ -138,7 +138,7 @@ REACT_APP_BACKEND = [BACKEND_URL]
     <td>Register Seller</td>
   </tr>
   <tr>
-    <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/fdd9fde8-f9dd-4d81-9896-c14bb8ad6528" border="0" alt="3" /> </td>
+    <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/home_ss.png" border="0" alt="3" /> </td>
      <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/f0dbf92a-7c54-4917-a5a6-c1d81af52505"  border="0" alt="4" /></td>
   </tr>
    <tr>
@@ -147,8 +147,8 @@ REACT_APP_BACKEND = [BACKEND_URL]
   </tr>
 
   <tr>
-    <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/5d89eebe-4eb3-4e0a-ae58-7a0ce8520404" border="0" alt="3" /> </td>
-     <td><img width="350px"  src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/3efdfdbb-ce56-430b-ac72-d7df1777839d"  border="0" alt="4" /></td>
+    <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/detailProduct_ss.png" border="0" alt="3" /> </td>
+     <td><img width="350px"  src="https://github.com/hasbiriza/FE-Blanja/blob/main/public/Cart_ss.png"  border="0" alt="4" /></td>
   </tr>
    <tr>
     <td>Detail Product</td>
