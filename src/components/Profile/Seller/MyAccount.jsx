@@ -4,16 +4,12 @@ import Image from "next/image";
 import LoginFace from "@/assets/Images/LoginFace.png";
 import {
   TextField,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  FormControl,
   Button,
 } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 const MyAccount = () => {
   const [user, setUser] = useState({});
@@ -25,7 +21,7 @@ const MyAccount = () => {
       try {
         const id = localStorage.getItem("id");
         const response = await axios.get(
-          `http://localhost:8080/api/v1/customers/${id}`
+          `http://localhost:8080/api/v1/sellers/${id}`
         );
         setUser(response.data.data);
       } catch (error) {
@@ -36,7 +32,7 @@ const MyAccount = () => {
   }, []);
 
   const validationSchema = yup.object({
-    customer_name: yup
+    seller_storename: yup
       .string()
       .required("Please enter your name")
       .min(3, "Name should be of minimum 3 characters length")
@@ -45,62 +41,64 @@ const MyAccount = () => {
       .string()
       .required("Please enter your email")
       .email("Enter a valid email"),
-    customer_phone: yup
+    phone: yup
       .string()
       .required("Please enter your phone number")
       .matches(/^\d+$/, "Phone number should contain only digits")
       .min(10, "Phone number should be of minimum 10 digits length")
       .max(15, "Phone number should be of maximum 15 digits length"),
-    gender: yup.string().required("Please select your gender"),
-    birthday: yup.string().required("Please select your date of birth"),
+    seller_description: yup
+      .string()
+      .required("Please enter your store description")
+      .min(10, "Description should be of minimum 10 characters length")
+      .max(200, "Description should be of maximum 200 characters length"),
   });
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      customer_name: user.customer_name || "",
+      seller_storename: user.seller_storename || "",
       email: user.email || "",
-      customer_phone: user.customer_phone || "",
-      gender: user.gender ? user.gender.toLowerCase() : "",
-      birthday: user.birthday || "",
+      phone: user.phone || "",
+      seller_description: user.seller_description || "",
     },
     validationSchema,
     onSubmit: async (values) => {
       const id = localStorage.getItem("id");
       let data;
       let headers;
-
+  
       if (selectedImage) {
+        // Use FormData if an image is selected
         data = new FormData();
-        data.append("customer_name", values.customer_name);
+        data.append("seller_storename", values.seller_storename);
         data.append("email", values.email);
-        data.append("customer_phone", values.customer_phone);
-        data.append("gender", values.gender.toUpperCase());
-        data.append("birthday", values.birthday);
+        data.append("phone", values.phone);
+        data.append("seller_description", values.seller_description);
         data.append("photo", selectedImage);
         headers = {
           "Content-Type": "multipart/form-data",
         };
       } else {
+        // Use JSON if no image is selected
         data = {
-          customer_name: values.customer_name,
+          seller_storename: values.seller_storename,
           email: values.email,
-          customer_phone: values.customer_phone,
-          gender: values.gender.toUpperCase(),
-          birthday: values.birthday,
+          phone: values.phone,
+          seller_description: values.seller_description,
         };
         headers = {
           "Content-Type": "application/json",
         };
       }
-
-      console.log("Data being sent: ", data);
-
+  
+      console.log("Data being sent: ", data); // Log data
+  
       try {
-        const response = await axios.put(`http://localhost:8080/api/v1/customers/${id}`, data, {
+        const response = await axios.put(`http://localhost:8080/api/v1/sellers/${id}`, data, {
           headers: headers,
         });
-        console.log("Response: ", response);
+        console.log("Response: ", response); // Log response
         Swal.fire({
           title: "Success!",
           text: "Account updated successfully!",
@@ -118,12 +116,13 @@ const MyAccount = () => {
       }
     },
   });
-
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
     setPreviewImage(URL.createObjectURL(file));
   };
+  
 
   return (
     <div className="border-1 border-gray-400 rounded-lg p-3">
@@ -135,17 +134,22 @@ const MyAccount = () => {
         <Row>
           <Col xs={12} sm={9}>
             <div className="flex items-center my-3 p-2">
-              <h6 className="text-gray-500 block w-[30%]">Name</h6>
+              <h6 className="text-gray-500 block w-[30%]">Store Name</h6>
               <TextField
-                name="customer_name"
+                name="seller_storename"
                 type="text"
                 className="flex-grow"
                 placeholder="Johanes Mikael"
-                value={formik.values.customer_name}
+                value={formik.values.seller_storename}
                 onChange={formik.handleChange}
                 fullWidth
-                error={formik.touched.customer_name && Boolean(formik.errors.customer_name)}
-                helperText={formik.touched.customer_name && formik.errors.customer_name}
+                error={
+                  formik.touched.seller_storename &&
+                  Boolean(formik.errors.seller_storename)
+                }
+                helperText={
+                  formik.touched.seller_storename && formik.errors.seller_storename
+                }
               />
             </div>
             <div className="flex items-center my-3 p-2">
@@ -165,48 +169,49 @@ const MyAccount = () => {
             <div className="flex items-center my-3 p-2">
               <h6 className="text-gray-500 block w-[30%]">Phone number</h6>
               <TextField
-                name="customer_phone"
+                name="phone"
                 type="text"
                 className="flex-grow"
                 placeholder="08901289012"
-                value={formik.values.customer_phone}
+                value={formik.values.phone}
                 onChange={formik.handleChange}
                 fullWidth
-                error={formik.touched.customer_phone && Boolean(formik.errors.customer_phone)}
-                helperText={formik.touched.customer_phone && formik.errors.customer_phone}
+                error={
+                  formik.touched.phone &&
+                  Boolean(formik.errors.phone)
+                }
+                helperText={
+                  formik.touched.phone && formik.errors.phone
+                }
               />
             </div>
             <div className="flex items-center my-3 p-2">
-              <h6 className="text-gray-500 inline-block w-[23%]">Gender</h6>
-              <FormControl component="fieldset" sx={{ flexGrow: 1 }} className="border">
-                <RadioGroup
-                  row
-                  aria-label="gender"
-                  name="gender"
-                  value={formik.values.gender}
-                  onChange={formik.handleChange}
-                  sx={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <FormControlLabel value="male" control={<Radio />} label="Male" />
-                  <FormControlLabel value="female" control={<Radio />} label="Female" />
-                </RadioGroup>
-              </FormControl>
-            </div>
-            <div className="flex items-center my-3 p-2">
-              <h6 className="text-gray-500 block w-[30%]">Date of Birth</h6>
+              <h6 className="text-gray-500 block w-[30%]">Store Description</h6>
               <TextField
-                name="birthday"
-                type="date"
+                name="seller_description"
+                type="text"
                 className="flex-grow"
-                value={formik.values.birthday}
+                placeholder="Describe your store"
+                value={formik.values.seller_description}
                 onChange={formik.handleChange}
                 fullWidth
-                error={formik.touched.birthday && Boolean(formik.errors.birthday)}
-                helperText={formik.touched.birthday && formik.errors.birthday}
+                multiline
+                rows={4}
+                error={
+                  formik.touched.seller_description &&
+                  Boolean(formik.errors.seller_description)
+                }
+                helperText={
+                  formik.touched.seller_description && formik.errors.seller_description
+                }
               />
             </div>
           </Col>
-          <Col xs={12} sm={3} className="d-flex justify-content-center align-items-center flex-column border-l-2 border-gray-700">
+          <Col
+            xs={12}
+            sm={3}
+            className="d-flex justify-content-center align-items-center flex-column border-l-2 border-gray-700"
+          >
             <Image
               src={previewImage || user.photo || LoginFace}
               alt="LoginFace"
@@ -224,7 +229,12 @@ const MyAccount = () => {
               }}
             >
               Select Image
-              <input type="file" hidden accept="image/*" onChange={handleImageChange} />
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                onChange={handleImageChange}
+              />
             </Button>
           </Col>
         </Row>

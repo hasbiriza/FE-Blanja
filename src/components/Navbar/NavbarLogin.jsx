@@ -9,8 +9,7 @@ import Image from "next/image";
 import LogoBlanja from "@/assets/Images/LogoBlanja.png";
 import LoginFace from "@/assets/Images/LoginFace.png";
 import Link from "next/link";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import { ShoppingCart, Notifications, Mail, FilterList } from "@mui/icons-material";
@@ -25,23 +24,43 @@ const IconButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const NavbarLogin = ({ id }) => {
-  const [user, setUser] = useState({});
+const NavbarLogin = ({ id, role }) => {
+  const [user, setUser] = useState({ photo: null });
 
- useEffect(() => {
-  const fetchUserPhoto = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/api/v1/customers/${id}`);
-      const userData = response.data.data;
-      setUser(userData);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        let response;
 
-  fetchUserPhoto();
-}, [id]);
+        if (role === "customer") {
+          response = await axios.get(`http://localhost:8080/api/v1/customers/${id}`);
+        } else if (role === "seller") {
+          response = await axios.get(`http://localhost:8080/api/v1/sellers/${id}`);
+        }
 
+        const userData = response.data.data;
+        console.log(userData);
+        setUser(userData);
+
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+
+        if (error.response && error.response.status === 404) {
+          setUser({ 
+            customer_name: "Guest", 
+            photo: null 
+          });
+        } else {
+          setUser({
+            customer_name: "Error loading profile",
+            photo: null
+          });
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [id, role]);
 
   return (
     <>
@@ -54,7 +73,7 @@ const NavbarLogin = ({ id }) => {
         >
           <Container className="d-flex justify-content-between align-items-center">
             <Navbar.Brand as={Link} href="/">
-              <Image src={LogoBlanja }  alt="logo" />
+              <Image src={LogoBlanja } alt="logo" />
             </Navbar.Brand>
             <Form
               className="d-flex align-items-center border rounded"
@@ -99,11 +118,10 @@ const NavbarLogin = ({ id }) => {
                   </Nav.Link>
                   <NavDropdown
                     title={
-                      <div style={{ display: "flex", alignItems: "center", width:"30px" }}>
+                      <div style={{ display: "flex", alignItems: "center", width: "30px" }}>
                         <Image
                           src={user.photo || LoginFace}
-                          roundedCircle
-                          alt="LogoLogin"
+                          alt="Profile"
                           height={27}
                           width={27}
                           className="rounded-full border"
@@ -135,7 +153,6 @@ const NavbarLogin = ({ id }) => {
         </Navbar>
       ))}
 
-      {/* Inline CSS to remove the dropdown arrow */}
       <style jsx global>{`
         .no-caret .dropdown-toggle::after {
           display: none !important;
