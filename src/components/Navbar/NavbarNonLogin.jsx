@@ -53,10 +53,10 @@ const NavbarNonLogin = () => {
                   <Nav.Link as={Link} href="#action2" className=" mx-1 ">
                     <FiShoppingCart size={24} color="gray" />
                   </Nav.Link>
-                  <Nav.Link as={Link} href="#action2" className=" mx-1 ">
+                  <Nav.Link as={Link} href="/auth/login" className=" mx-1 ">
                   <button>Masuk</button>
                   </Nav.Link>
-                  <Nav.Link as={Link} href="#action2" className=" mx-1  ">
+                  <Nav.Link as={Link} href="/auth/register" className=" mx-1  ">
                   <button>SignUp</button>
                   </Nav.Link>
                  
