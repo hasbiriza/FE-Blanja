@@ -19,8 +19,8 @@ const RegisterForm = () => {
   const handleSubmit = async (values) => {
     const endpoint =
       activeTab === "Customer"
-        ? "http://localhost:8080/api/v1/customers"
-        : "http://localhost:8080/api/v1/sellers";
+        ? "https://be-blanja-productionn.up.railway.app/api/v1/customers"
+        : "https://be-blanja-productionn.up.railway.app/api/v1/sellers";
 
     try {
       console.log(values)

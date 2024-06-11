@@ -12,7 +12,7 @@ const Cards = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/products")
+      .get("https://be-blanja-productionn.up.railway.app/api/v1/products")
       .then((response) => {
         setProducts(response.data.data);
       })

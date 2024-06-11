@@ -86,7 +86,7 @@ const Checkout = () => {
     const fetchAddresses = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/v1/addresses"
+          "https://be-blanja-productionn.up.railway.app/api/v1/addresses"
         );
         const filteredAddresses = response.data.data.filter(
           (address) => address.customer_id == Id

@@ -25,7 +25,7 @@ const MyAccount = () => {
       try {
         const id = localStorage.getItem("id");
         const response = await axios.get(
-          `http://localhost:8080/api/v1/customers/${id}`
+          `https://be-blanja-productionn.up.railway.app/api/v1/customers/${id}`
         );
         setUser(response.data.data);
       } catch (error) {
@@ -97,7 +97,7 @@ const MyAccount = () => {
       console.log("Data being sent: ", data);
 
       try {
-        const response = await axios.put(`http://localhost:8080/api/v1/customers/${id}`, data, {
+        const response = await axios.put(`https://be-blanja-productionn.up.railway.app/api/v1/customers/${id}`, data, {
           headers: headers,
         });
         console.log("Response: ", response);

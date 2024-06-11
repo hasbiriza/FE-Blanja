@@ -37,21 +37,26 @@ const Carousel2 = () => {
         autoplay={{
           delay: 2000,
         }}
-        // spaceBetween={50}
-        onSlideChange
-        onSwiper={(swiper) => console.log(swiper)}
         breakpoints={{
-          400: {
+          320: {
             slidesPerView: 1,
+            spaceBetween: 10,
           },
-
+          480: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
           768: {
             slidesPerView: 2,
-            spaceBetween: 5,
+            spaceBetween: 30,
           },
-          980: {
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          1280: {
             slidesPerView: 5,
-            spaceBetween: 70,
+            spaceBetween: 50,
           },
         }}
         pagination={{
@@ -61,41 +66,41 @@ const Carousel2 = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide >
-          <Image src={tshirt} alt="bg1" />
+        <SwiperSlide>
+          <Image src={tshirt} alt="tshirt" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={shoes} alt="bg2" />
+          <Image src={shoes} alt="shoes" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={jacket} alt="bg1" />
+          <Image src={jacket} alt="jacket" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={shorts} alt="bg2" />
+          <Image src={shorts} alt="shorts" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={pants} alt="bg2" />
+          <Image src={pants} alt="pants" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={formalsuit} alt="bg1" />
+          <Image src={formalsuit} alt="formalsuit" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={socks} alt="bg2" />
+          <Image src={socks} alt="socks" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={handbag} alt="bg1" />
+          <Image src={handbag} alt="handbag" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={watch} alt="bg2" />
+          <Image src={watch} alt="watch" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={tie} alt="bg2" />
+          <Image src={tie} alt="tie" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={dress} alt="bg2" />
+          <Image src={dress} alt="dress" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={glasses} alt="bg2" />
+          <Image src={glasses} alt="glasses" />
         </SwiperSlide>
       </Swiper>
     </div>

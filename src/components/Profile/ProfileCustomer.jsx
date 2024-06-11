@@ -19,7 +19,7 @@ const ProfileCustomer = () => {
   
     axios
       .get(
-        `http://localhost:8080/api/v1/customers/${id}`)
+        `https://be-blanja-productionn.up.railway.app/api/v1/customers/${id}`)
         .then((res) => {
           const customer = res.data.data;
           setCustomer(customer);

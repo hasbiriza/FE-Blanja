@@ -33,9 +33,9 @@ const NavbarLogin = ({ id, role }) => {
         let response;
 
         if (role === "customer") {
-          response = await axios.get(`http://localhost:8080/api/v1/customers/${id}`);
+          response = await axios.get(`https://be-blanja-productionn.up.railway.app/api/v1/customers/${id}`);
         } else if (role === "seller") {
-          response = await axios.get(`http://localhost:8080/api/v1/sellers/${id}`);
+          response = await axios.get(`https://be-blanja-productionn.up.railway.app/api/v1/sellers/${id}`);
         }
 
         const userData = response.data.data;

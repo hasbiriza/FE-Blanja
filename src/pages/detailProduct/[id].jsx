@@ -42,7 +42,7 @@ const ProductDetail = ({ id }) => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/v1/products/${id}`
+          `https://be-blanja-productionn.up.railway.app/api/v1/products/${id}`
         );
         const productData = response.data.data;
         productData.colors = parseColors(productData.color);

@@ -14,7 +14,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Swal from "sweetalert2";
 
-const ShippingAddress = () => {
+const MyProduct = () => {
   const [showModal, setShowModal] = useState(false);
   const [addresses, setAddresses] = useState([]);
 
@@ -48,7 +48,7 @@ const ShippingAddress = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      const url = `http://localhost:8080/api/v1/addresses`;
+      const url = `https://be-blanja-productionn.up.railway.app/api/v1/addresses`;
       const dataToSend = {
         ...values,
         customer_id: parseInt(customerId), // Mengonversi customerId menjadi integer
@@ -82,7 +82,7 @@ const ShippingAddress = () => {
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/addresses");
+        const response = await axios.get("https://be-blanja-productionn.up.railway.app/api/v1/addresses");
         const filteredAddresses = response.data.data.filter(address => address.customer_id == customerId);
         setAddresses(filteredAddresses);
       } catch (error) {
@@ -102,7 +102,7 @@ const ShippingAddress = () => {
   const handleDelete = async (index) => {
     const addressId = addresses[index].ID; // Mengambil ID dari alamat yang akan dihapus
     try {
-      await axios.delete(`http://localhost:8080/api/v1/addresses/${addressId}`);
+      await axios.delete(`https://be-blanja-productionn.up.railway.app/api/v1/addresses/${addressId}`);
       setAddresses(addresses.filter((address) => address.ID !== addressId)); // Memfilter alamat berdasarkan ID yang tidak sama dengan addressId yang dihapus
       Swal.fire({
         title: "Success!",
@@ -125,7 +125,7 @@ const ShippingAddress = () => {
   
 
   return (
-    <Container>
+    <Container className="border">
       <Typography variant="h5" component="h3" align="center" gutterBottom>
         Choose another address
       </Typography>
@@ -284,4 +284,4 @@ const ShippingAddress = () => {
   );
 };
 
-export default ShippingAddress;
+export default MyProduct;

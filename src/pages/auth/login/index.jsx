@@ -18,11 +18,14 @@ const Login = () => {
     setActiveTab(selectedKey);
   };
 
+
+  // url="https://be-blanja-productionn.up.railway.app/"
+
   const handleSubmit = async (values) => {
     const endpoint =
       activeTab === "Customer"
-        ? "http://localhost:8080/api/v1/customers/login"
-        : "http://localhost:8080/api/v1/sellers/login";
+        ? "https://be-blanja-productionn.up.railway.app/api/v1/customers/login"
+        : "https://be-blanja-productionn.up.railway.app/api/v1/sellers/login";
   
     try {
       console.log(values);

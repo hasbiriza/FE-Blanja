@@ -3,14 +3,14 @@ import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import LoginFace from "@/assets/Images/LoginFace.png";
 import MyAccount from "@/components/Profile/Seller/MyAccount";
-import ShippingAddress from "@/components/Profile/Seller/ShippingAddress";
-import ShippingAddress2 from "@/components/Profile/Seller/ShippingAddress2";
 import MyOrder from "@/components/Profile/Seller/MyOrder";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import PersonIcon from "@mui/icons-material/Person";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
+import MyProduct from "@/components/Profile/Seller/MyProduct";
+import SellingProduct from "./Seller/SellingProduct";
 
 const ProfileCustomer = () => {
   const [activeNav, setActiveNav] = useState("myAccount");
@@ -21,7 +21,7 @@ const ProfileCustomer = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/sellers/${id}`)
+      .get(`https://be-blanja-productionn.up.railway.app/api/v1/sellers/${id}`)
       .then((res) => {
         const customer = res.data.data;
         setSellers(customer);
@@ -113,9 +113,9 @@ const ProfileCustomer = () => {
                 <div className="pl-4 mt-2">
                   <div
                     className={`d-flex align-items-center mt-2 profile-nav-link ${
-                      activeNav === "shippingAddress1" ? "active" : ""
+                      activeNav === "myProduct" ? "active" : ""
                     }`}
-                    onClick={() => handleNavClick("shippingAddress1")}
+                    onClick={() => handleNavClick("myProduct")}
                   >
                     <h6 className="fw-bold text-sm ml-3 my-1">
                       MyProduct
@@ -123,9 +123,9 @@ const ProfileCustomer = () => {
                   </div>
                   <div
                     className={`d-flex align-items-center mt-2 profile-nav-link ${
-                      activeNav === "shippingAddress2" ? "active" : ""
+                      activeNav === "sellingProduct" ? "active" : ""
                     }`}
-                    onClick={() => handleNavClick("shippingAddress2")}
+                    onClick={() => handleNavClick("sellingProduct")}
                   >
                     <h6 className="fw-bold text-sm ml-3 my-1">
                       Selling Product
@@ -162,8 +162,8 @@ const ProfileCustomer = () => {
             className="border border-danger vh-100 profile-content-container"
           >
             {activeNav === "myAccount" && <MyAccount />}
-            {activeNav === "shippingAddress1" && <ShippingAddress />}
-            {activeNav === "shippingAddress2" && <ShippingAddress2 />}
+            {activeNav === "myProduct" && <MyProduct />}
+            {activeNav === "sellingProduct" && <SellingProduct/>}
             {activeNav === "myOrder" && <MyOrder />}
           </Col>
         </Row>
