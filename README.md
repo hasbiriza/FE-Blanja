@@ -1,17 +1,17 @@
-
-
-
-
 <br />
 <p align="center">
-<div align="center">
-  <img height="150" <img src="https://github.com/sandriirawan/Fe_Blanja_React/assets/80002249/5fd2db78-c17a-4aba-bbc6-77ef3a475c26" alt="logo" border="0"/>
-</div>
+  <div align="center">
+    <img height="150" src="https://github.com/hasbiriza/BE-Blanja/blob/main/LogoBlanja.png" alt="blanja" border="0"/>
+  </div>
   <h3 align="center">Blanja</h3>
   <p align="center">
-    <a href="https://blanja-delta.vercel.app/home"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/hasbiriza/FE-Blanja"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://blanja-delta.vercel.app/home">View Demo</a>
+  <a href="https://be-blanja.vercel.app/">View Demo</a>
+    ||
+     <a href="https://github.com/hasbiriza/BE-Blanja">View Back End</a>
+    ||
+    <a href="https://documenter.getpostman.com/view/31500374/2sA3QwcpsG">Api Demo</a>
   </p>
 </p>
 
